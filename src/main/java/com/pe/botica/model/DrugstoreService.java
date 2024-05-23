@@ -1,12 +1,14 @@
 package com.pe.botica.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.pe.botica.model.compoundId.DrugstoreServiceId;
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Table(name = "drugstore_service")
 @Data
+@IdClass(DrugstoreServiceId.class)
 public class DrugstoreService {
     @Id
     @ManyToOne
