@@ -1,6 +1,7 @@
 package com.pe.botica.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.pe.botica.model.compoundId.DrugstoreProductId;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -9,6 +10,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "drugstore_product")
 @Data
+@IdClass(DrugstoreProductId.class)
 public class DrugstoreProduct {
     @Id
     @ManyToOne
