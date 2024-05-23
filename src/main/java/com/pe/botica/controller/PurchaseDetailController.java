@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
 import java.util.List;
@@ -42,23 +43,33 @@ public class PurchaseDetailController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @PostMapping("/register")
-    public ResponseEntity<Object> addPurchaseDetail( @RequestBody PurchaseDetailDTO purchaseDetailDTO ){
-        Optional<Product> product = productService.findById(purchaseDetailDTO.getProductId());
-        Optional<Service> service = serviceService.findById(purchaseDetailDTO.getServiceId());
+    public ResponseEntity<Object> addPurchaseDetail( @RequestBody PurchaseDetailDTO purchaseDetailDTO ) {
         Optional<Purchase> purchase = purchaseService.findById(purchaseDetailDTO.getPurchaseId());
+        if (purchase.isEmpty()) {
+            return new ResponseEntity<>("Purchase not found", HttpStatus.BAD_REQUEST);
+        }
 
-        if ((product.isEmpty() && service.isEmpty()) || purchase.isEmpty()) {
-            return new ResponseEntity<>("Product and Service not found", HttpStatus.BAD_REQUEST);
+        boolean hasProduct = purchaseDetailDTO.getProductId() != null;
+        boolean hasService = purchaseDetailDTO.getServiceId() != null;
+
+        if (hasProduct == hasService) {
+            return new ResponseEntity<>("Exactly one of productId or serviceId must be provided, not both", HttpStatus.BAD_REQUEST);
         }
 
         PurchaseDetail purchaseDetail = new PurchaseDetail();
         purchaseDetail.setQuantity(purchaseDetailDTO.getQuantity());
         purchaseDetail.setPrice(purchaseDetailDTO.getPrice());
         purchaseDetail.setDiscount(purchaseDetailDTO.getDiscount());
-        product.ifPresent(purchaseDetail::setProduct);
-        service.ifPresent(purchaseDetail::setService);
         purchase.ifPresent(purchaseDetail::setPurchase);
-
+        if (hasProduct) {
+            productService.findById(purchaseDetailDTO.getProductId())
+                    .ifPresentOrElse(purchaseDetail::setProduct,
+                            () -> { throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product not found"); });
+        } else {
+            serviceService.findById(purchaseDetailDTO.getServiceId())
+                    .ifPresentOrElse(purchaseDetail::setService,
+                            () -> { throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Service not found"); });
+        }
         PurchaseDetail newPurchaseDetail = purchaseDetailService.save(purchaseDetail);
         return new ResponseEntity<>(newPurchaseDetail, HttpStatus.CREATED);
     }
