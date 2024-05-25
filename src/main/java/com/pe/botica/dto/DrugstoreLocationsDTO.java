@@ -11,5 +11,4 @@ public class DrugstoreLocationsDTO {
     private String name;
     private String latitude;
     private String longitude;
-    private UUID roleId;
 }
