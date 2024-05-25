@@ -18,10 +18,10 @@ public class PurchaseDetail {
     @JoinColumn(name = "purchase_id")
     @JsonBackReference
     private Purchase purchase;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "product_id", nullable = true)
     private Product product;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "service_id", nullable = true)
     private Service service;
     @Column(name = "quantity")
