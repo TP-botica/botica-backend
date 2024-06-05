@@ -6,11 +6,13 @@ import com.pe.botica.util.RoleEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "user")
@@ -21,7 +23,7 @@ public class User implements UserDetails {
     private UUID id;
     @Column(name = "name", length = 100)
     private String name;
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
     @Column(name = "password", length = 100)
     private String password;
@@ -51,7 +53,14 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        if(roleEnum == null) return null;
+        if(roleEnum.getPermissions() == null) return null;
+
+        return roleEnum.getPermissions().stream()
+                .map(Enum::name)
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+
     }
     @Override
     public String getPassword(){

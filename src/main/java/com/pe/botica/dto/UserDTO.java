@@ -11,7 +11,9 @@ public class UserDTO {
     private String name;
     private String email;
     private String password;
+    private String repeatedPassword;
     private String latitude;
     private String longitude;
     private UUID roleId;
+    private String jwt;
 }
