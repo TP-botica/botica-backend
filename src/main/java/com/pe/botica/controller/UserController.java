@@ -46,6 +46,11 @@ public class UserController {
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+    @GetMapping("/profile")
+    public ResponseEntity<User> findMyProfile(){
+        User user = authService.findLoggedInUser();
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
     @PostMapping("/register")
     public ResponseEntity<Object> addUser( @RequestBody UserDTO userDTO ){
         Optional<Role> role = roleService.findById(userDTO.getRoleId());
