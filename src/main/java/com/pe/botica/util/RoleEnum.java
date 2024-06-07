@@ -1,6 +1,5 @@
 package com.pe.botica.util;
 
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,6 +11,8 @@ public enum RoleEnum {
             RolePermission.DELETE_CATEGORY,
             RolePermission.READ_ALL_PRODUCTS,
             RolePermission.READ_PRODUCT_BY_ID,
+            RolePermission.READ_ALL_PRODUCTS_WITH_DETAILS,
+            RolePermission.READ_ALL_SERVICES_WITH_DETAILS,
             RolePermission.REGISTER_PRODUCT,
             RolePermission.DELETE_PRODUCT,
             RolePermission.READ_ALL_SERVICES,
@@ -41,7 +42,8 @@ public enum RoleEnum {
             RolePermission.READ_ALL_DRUGSTORE_SERVICES,
             RolePermission.READ_DRUGSTORE_SERVICE_BY_ID,
             RolePermission.REGISTER_DRUGSTORE_SERVICE,
-            RolePermission.DELETE_DRUGSTORE_SERVICE
+            RolePermission.DELETE_DRUGSTORE_SERVICE,
+            RolePermission.READ_MY_PROFILE
     )),
     ROLE_CUSTOMER(Arrays.asList(
             RolePermission.READ_ALL_CATEGORIES,
@@ -59,7 +61,10 @@ public enum RoleEnum {
             RolePermission.READ_ALL_DRUGSTORE_PRODUCTS,
             RolePermission.READ_DRUGSTORE_PRODUCT_BY_ID,
             RolePermission.READ_ALL_DRUGSTORE_SERVICES,
-            RolePermission.READ_DRUGSTORE_SERVICE_BY_ID
+            RolePermission.READ_DRUGSTORE_SERVICE_BY_ID,
+            RolePermission.READ_ALL_PRODUCTS_WITH_DETAILS,
+            RolePermission.READ_ALL_SERVICES_WITH_DETAILS,
+            RolePermission.READ_MY_PROFILE
     )),
     ROLE_DRUGSTORE(Arrays.asList(
             RolePermission.READ_ALL_CATEGORIES,
@@ -75,7 +80,8 @@ public enum RoleEnum {
             RolePermission.READ_ALL_DRUGSTORE_SERVICES,
             RolePermission.READ_DRUGSTORE_SERVICE_BY_ID,
             RolePermission.REGISTER_DRUGSTORE_SERVICE,
-            RolePermission.DELETE_DRUGSTORE_SERVICE
+            RolePermission.DELETE_DRUGSTORE_SERVICE,
+            RolePermission.READ_MY_PROFILE
     ));
 
     private List<RolePermission> permissions;
