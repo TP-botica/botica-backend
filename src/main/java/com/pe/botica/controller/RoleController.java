@@ -1,5 +1,6 @@
 package com.pe.botica.controller;
 
+import com.pe.botica.dto.RoleDTO;
 import com.pe.botica.model.Category;
 import com.pe.botica.model.Role;
 import com.pe.botica.service.CategoryService;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("/role")
 public class RoleController {
@@ -20,8 +21,13 @@ public class RoleController {
     private RoleService roleService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<Role>> getAllCategories(){
+    public ResponseEntity<List<Role>> getAllRoles(){
         List<Role> roles = roleService.findAll();
+        return new ResponseEntity<>(roles, HttpStatus.OK);
+    }
+    @GetMapping("/getList")
+    public ResponseEntity<List<RoleDTO>> getRoles(){
+        List<RoleDTO> roles = roleService.findRoles();
         return new ResponseEntity<>(roles, HttpStatus.OK);
     }
     @GetMapping("/searchById/{id}")

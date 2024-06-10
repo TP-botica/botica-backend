@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -24,7 +25,9 @@ public class HttpSecurityConfiguration {
     private JwtAuthenticationFilter jwtAuthenticationFilter;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity.csrf(AbstractHttpConfigurer::disable)
+        return httpSecurity
+                .cors(Customizer.withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement( sessionMagConfig ->  sessionMagConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(dapAuthProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
@@ -127,6 +130,7 @@ public class HttpSecurityConfiguration {
         authReqConfig.requestMatchers(HttpMethod.POST,"/user/auth").permitAll();
         authReqConfig.requestMatchers(HttpMethod.GET,"/user/validate").permitAll();
         authReqConfig.requestMatchers(HttpMethod.GET,"/role/all").permitAll();
+        authReqConfig.requestMatchers(HttpMethod.GET,"/role/getList").permitAll();
         authReqConfig.requestMatchers(HttpMethod.POST,"/role/register").permitAll();
 
         authReqConfig.anyRequest().authenticated();

@@ -15,5 +15,4 @@ public class UserDTO {
     private String latitude;
     private String longitude;
     private UUID roleId;
-    private String jwt;
 }
