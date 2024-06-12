@@ -49,14 +49,14 @@ public class PurchaseController {
     public ResponseEntity<Object> addPurchase(@RequestBody PurchaseRegisterDTO purchaseRegisterDTO) {
         Optional<User> drugstore = userService.findById(purchaseRegisterDTO.getDrugstoreId());
         Optional<User> customer = userService.findById(purchaseRegisterDTO.getCustomerId());
-
+        final double[] total = {0.0};
         if (drugstore.isEmpty() || customer.isEmpty()) {
             return new ResponseEntity<>("Drugstore or customer not found", HttpStatus.BAD_REQUEST);
         }
 
         Purchase purchase = new Purchase();
         purchase.setDate(new Date());
-        purchase.setTotal(purchaseRegisterDTO.getTotal());
+
         drugstore.ifPresent(purchase::setDrugstore);
         customer.ifPresent(purchase::setCustomer);
 
@@ -86,11 +86,13 @@ public class PurchaseController {
                 } else {
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product or Service ID must be provided");
                 }
-
+                double subtotal = purchaseDetailDTO.getQuantity() * purchaseDetailDTO.getPrice();
+                double discount = purchaseDetailDTO.getDiscount() != null ? purchaseDetailDTO.getDiscount() : 0.0;
+                total[0] += subtotal - discount;
                 purchaseDetailService.save(purchaseDetail);
             });
         }
-
+        purchase.setTotal((float) total[0]);
         return new ResponseEntity<>(newPurchase, HttpStatus.CREATED);
     }
 

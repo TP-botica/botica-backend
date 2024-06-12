@@ -11,6 +11,5 @@ import java.util.UUID;
 public class PurchaseRegisterDTO {
     private UUID customerId;
     private UUID drugstoreId;
-    private Float total;
     private List<PurchaseDetailDTO> purchaseDetails;
 }

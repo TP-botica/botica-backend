@@ -63,17 +63,17 @@ public class UserController {
             user.setLatitude(userDTO.getLatitude());
             user.setLongitude(userDTO.getLongitude());
             role.ifPresent(r->{
-                if (r.getId().toString().equals("43d83abc-8f69-4ebf-9b31-3f90f846c0a2")) {
+                if (r.getId().toString().equals("6a3fc03b-7e5c-4e0a-83e4-589f50770b59")) {
                     user.setRoleEnum(RoleEnum.ROLE_CUSTOMER);
                 }
-                if (r.getId().toString().equals("9ad0e697-0a6e-4bb2-9708-eeef23cb5fbc")) {
-                    user.setRoleEnum(RoleEnum.ROLE_ADMINISTRATOR);
-                }
-                if (r.getId().toString().equals("4a3916ba-8089-47e6-8fe9-19812ffca856")) {
+                if (r.getId().toString().equals("f4cf77c4-f3db-4021-9340-3f22cc4dd2e1")) {
                     user.setRoleEnum(RoleEnum.ROLE_DRUGSTORE);
                 }
                 user.setRole(r);
             });
+            if(userDTO.getAccountNumber()!= null){
+                user.setAccountNumber(userDTO.getAccountNumber());
+            }
 
             User newUser = userService.save(user);
             return new ResponseEntity<>(newUser, HttpStatus.CREATED);

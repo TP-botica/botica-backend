@@ -31,6 +31,8 @@ public class User implements UserDetails {
     private String latitude;
     @Column(name = "longitude")
     private String longitude;
+    @Column(name = "account_number")
+    private String accountNumber;
     @ManyToOne
     @JoinColumn(name = "role_id")
     @JsonBackReference(value = "role-user")

@@ -14,5 +14,6 @@ public class UserDTO {
     private String repeatedPassword;
     private String latitude;
     private String longitude;
+    private String accountNumber;
     private UUID roleId;
 }
