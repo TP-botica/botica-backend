@@ -93,6 +93,8 @@ public class PurchaseController {
             });
         }
         purchase.setTotal((float) total[0]);
+        purchaseService.save(purchase);
+
         return new ResponseEntity<>(newPurchase, HttpStatus.CREATED);
     }
 
