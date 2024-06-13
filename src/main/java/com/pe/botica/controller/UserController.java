@@ -1,5 +1,6 @@
 package com.pe.botica.controller;
 
+import com.pe.botica.dto.UserDataDTO;
 import com.pe.botica.dto.auth.AuthenticationResponseDTO;
 import com.pe.botica.dto.UserDTO;
 import com.pe.botica.dto.auth.UserLoginDTO;
@@ -48,9 +49,14 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @GetMapping("/profile")
-    public ResponseEntity<User> findMyProfile(){
+    public ResponseEntity<UserDataDTO> findMyProfile(){
         User user = authService.findLoggedInUser();
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        UserDataDTO userData  = new UserDataDTO();
+        userData.setId(user.getId());
+        userData.setEmail(user.getEmail());
+        userData.setName(user.getName());
+        userData.setRoleEnum(user.getRoleEnum());
+        return new ResponseEntity<>(userData, HttpStatus.OK);
     }
     @PostMapping("/register")
     public ResponseEntity<Object> addUser( @RequestBody UserDTO userDTO ){

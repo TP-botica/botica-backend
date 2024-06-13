@@ -73,6 +73,8 @@ public class HttpSecurityConfiguration {
                 .hasAnyAuthority(RolePermission.READ_ALL_PRODUCTS.name());
         authReqConfig.requestMatchers(HttpMethod.GET, "/product/searchById/{id}")
                 .hasAnyAuthority(RolePermission.READ_PRODUCT_BY_ID.name());
+        authReqConfig.requestMatchers(HttpMethod.GET, "/product/allMyProducts/{drugstoreId}")
+                .hasAnyAuthority(RolePermission.READ_ALL_MY_PRODUCTS.name());
         authReqConfig.requestMatchers(HttpMethod.POST, "/product/register")
                 .hasAnyAuthority(RolePermission.REGISTER_PRODUCT.name());
         authReqConfig.requestMatchers(HttpMethod.DELETE, "/product/deleteById/{id}")

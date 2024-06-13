@@ -1,5 +1,6 @@
 package com.pe.botica.controller;
 
+import com.pe.botica.dto.MyProductsViewDTO;
 import com.pe.botica.dto.ProductDTO;
 import com.pe.botica.dto.ProductViewDTO;
 import com.pe.botica.model.Category;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("/product")
 public class ProductController {
@@ -30,6 +31,13 @@ public class ProductController {
     @GetMapping("/allWithDetails")
     public ResponseEntity<List<ProductViewDTO>> getAllProductsDetails(){
         List<ProductViewDTO> products = productService.findAllProducts();
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+    @GetMapping("/allMyProducts/{drugstoreId}")
+    public ResponseEntity<List<MyProductsViewDTO>> getAllMyProducts(
+            @PathVariable("drugstoreId") UUID drugstoreId
+    ){
+        List<MyProductsViewDTO> products = productService.findAllMyProducts(drugstoreId);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
     @GetMapping("/searchById/{id}")

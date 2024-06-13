@@ -1,5 +1,6 @@
 package com.pe.botica.service;
 
+import com.pe.botica.dto.MyProductsViewDTO;
 import com.pe.botica.dto.ProductViewDTO;
 import com.pe.botica.model.Product;
 import com.pe.botica.repository.ProductRepository;
@@ -19,4 +20,6 @@ public class ProductService {
     public Product save( Product product ){ return productRepository.save(product); }
     public void deleteById( UUID id ){ productRepository.deleteById(id);}
     public List<ProductViewDTO> findAllProducts(){ return productRepository.getAllProducts();}
+    public List<MyProductsViewDTO> findAllMyProducts(UUID drugstoreId){ return productRepository.getAllMyProducts(drugstoreId);}
+
 }
