@@ -1,7 +1,6 @@
 package com.pe.botica.controller;
 
 import com.pe.botica.dto.DrugstoreProductDTO;
-import com.pe.botica.model.Category;
 import com.pe.botica.model.DrugstoreProduct;
 import com.pe.botica.model.Product;
 import com.pe.botica.model.User;

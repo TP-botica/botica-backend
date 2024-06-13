@@ -1,6 +1,5 @@
 package com.pe.botica.controller;
 
-import com.pe.botica.dto.PurchaseDTO;
 import com.pe.botica.dto.PurchaseDetailDTO;
 import com.pe.botica.model.*;
 import com.pe.botica.service.*;
@@ -10,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

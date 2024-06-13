@@ -1,6 +1,5 @@
 package com.pe.botica.controller;
 
-import com.pe.botica.dto.ProductViewDTO;
 import com.pe.botica.dto.ServiceDTO;
 import com.pe.botica.dto.ServiceViewDTO;
 import com.pe.botica.model.Category;
