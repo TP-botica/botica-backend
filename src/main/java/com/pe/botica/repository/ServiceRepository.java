@@ -1,5 +1,6 @@
 package com.pe.botica.repository;
 
+import com.pe.botica.dto.ServiceOptionDTO;
 import com.pe.botica.dto.ServiceViewDTO;
 import com.pe.botica.model.Service;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -26,4 +27,13 @@ public interface ServiceRepository extends JpaRepository<Service, UUID> {
             """
     )
     public List<ServiceViewDTO> getAllServices();
+
+    @Query(value = """
+             SELECT new com.pe.botica.dto.ServiceViewDTO(
+             s.id,
+             s.name
+            ) from Service s
+            """
+    )
+    List<ServiceOptionDTO> getAllServiceOptions();
 }

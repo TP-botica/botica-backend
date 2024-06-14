@@ -1,7 +1,10 @@
 package com.pe.botica.controller;
 
+import com.pe.botica.dto.DrugstoreProductEditableDTO;
 import com.pe.botica.dto.DrugstoreServiceDTO;
+import com.pe.botica.dto.DrugstoreServiceEditableDTO;
 import com.pe.botica.model.*;
+import com.pe.botica.model.compoundId.DrugstoreProductId;
 import com.pe.botica.model.compoundId.DrugstoreServiceId;
 import com.pe.botica.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +45,14 @@ public class DrugstoreServiceController {
     }
     @PostMapping("/register")
     public ResponseEntity<DrugstoreService> addDrugstoreService( @RequestBody DrugstoreServiceDTO drugstoreServiceDTO ){
+        DrugstoreServiceId id = new DrugstoreServiceId(drugstoreServiceDTO.getServiceId(), drugstoreServiceDTO.getDrugstoreId());
+        Optional<DrugstoreService> existingDrugstoreService = drugstoreServiceService
+                .findById(id);
+
+        if (existingDrugstoreService.isPresent()) {
+            throw new RuntimeException("A service with the same drugstoreId and serviceId already exists.");
+        }
+
         Optional<User> drugstore = userService.findById(drugstoreServiceDTO.getDrugstoreId());
         Optional<Service> service = serviceService.findById(drugstoreServiceDTO.getServiceId());
         DrugstoreService drugstoreService = new DrugstoreService();
@@ -51,6 +62,20 @@ public class DrugstoreServiceController {
 
         DrugstoreService newDrugstoreService = drugstoreServiceService.save(drugstoreService);
         return new ResponseEntity<>(newDrugstoreService, HttpStatus.CREATED);
+    }
+    @PutMapping("/edit/{drugstoreId}/{serviceId}")
+    public ResponseEntity<DrugstoreService> updateDrugstoreProduct(
+            @PathVariable("drugstoreId") UUID drugstoreId,
+            @PathVariable("serviceId") UUID serviceId,
+            @RequestBody DrugstoreServiceEditableDTO drugstoreService
+    ){
+        DrugstoreServiceId id = new DrugstoreServiceId(serviceId, drugstoreId);
+        DrugstoreService drugstoreServiceUpdate = drugstoreServiceService.findById(id)
+                .orElseThrow(()->new RuntimeException("drugstore service not found with id: " + id));
+
+        drugstoreServiceUpdate.setPrice(drugstoreService.getPrice());
+
+        return new ResponseEntity<>(drugstoreServiceService.save(drugstoreServiceUpdate), HttpStatus.OK);
     }
     @DeleteMapping("/deleteById/{drugstoreId}/{serviceId}")
     public ResponseEntity<HttpStatus> deleteDrugstoreService(

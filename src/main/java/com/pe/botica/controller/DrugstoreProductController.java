@@ -1,6 +1,7 @@
 package com.pe.botica.controller;
 
 import com.pe.botica.dto.DrugstoreProductDTO;
+import com.pe.botica.dto.DrugstoreProductEditableDTO;
 import com.pe.botica.model.DrugstoreProduct;
 import com.pe.botica.model.Product;
 import com.pe.botica.model.User;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("/drugstoreProduct")
 public class DrugstoreProductController {
@@ -46,6 +47,14 @@ public class DrugstoreProductController {
     }
     @PostMapping("/register")
     public ResponseEntity<DrugstoreProduct> addDrugstoreProduct( @RequestBody DrugstoreProductDTO drugstoreProductDTO ){
+        DrugstoreProductId id = new DrugstoreProductId(drugstoreProductDTO.getProductId(), drugstoreProductDTO.getDrugstoreId());
+        Optional<DrugstoreProduct> existingDrugstoreProduct = drugstoreProductService
+                .findById(id);
+
+        if (existingDrugstoreProduct.isPresent()) {
+            throw new RuntimeException("A product with the same drugstoreId and productId already exists.");
+        }
+
         Optional<User> drugstore = userService.findById(drugstoreProductDTO.getDrugstoreId());
         Optional<Product> product = productService.findById(drugstoreProductDTO.getProductId());
         DrugstoreProduct drugstoreProduct = new DrugstoreProduct();
@@ -56,6 +65,21 @@ public class DrugstoreProductController {
 
         DrugstoreProduct newDrugstoreProduct = drugstoreProductService.save(drugstoreProduct);
         return new ResponseEntity<>(newDrugstoreProduct, HttpStatus.CREATED);
+    }
+    @PutMapping("/edit/{drugstoreId}/{productId}")
+    public ResponseEntity<DrugstoreProduct> updateDrugstoreProduct(
+            @PathVariable("drugstoreId") UUID drugstoreId,
+            @PathVariable("productId") UUID productId,
+            @RequestBody DrugstoreProductEditableDTO drugstoreProduct
+    ){
+        DrugstoreProductId id = new DrugstoreProductId(productId, drugstoreId);
+        DrugstoreProduct drugstoreProductUpdate = drugstoreProductService.findById(id)
+                .orElseThrow(()->new RuntimeException("drugstore product not found with id: " + id));
+
+        drugstoreProductUpdate.setPrice(drugstoreProduct.getPrice());
+        drugstoreProductUpdate.setStock(drugstoreProduct.getStock());
+
+        return new ResponseEntity<>(drugstoreProductService.save(drugstoreProductUpdate), HttpStatus.OK);
     }
     @DeleteMapping("/deleteById/{drugstoreId}/{productId}")
     public ResponseEntity<HttpStatus> deleteDrugstoreProduct(

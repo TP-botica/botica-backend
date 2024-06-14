@@ -55,6 +55,8 @@ public class HttpSecurityConfiguration {
                 .hasAnyAuthority(RolePermission.REGISTER_DRUGSTORE_PRODUCT.name());
         authReqConfig.requestMatchers(HttpMethod.DELETE, "/drugstoreProduct/deleteById/{drugstoreId}/{productId}")
                 .hasAnyAuthority(RolePermission.DELETE_DRUGSTORE_PRODUCT.name());
+        authReqConfig.requestMatchers(HttpMethod.PUT, "/drugstoreProduct/edit/{drugstoreId}/{productId}")
+                .hasAnyAuthority(RolePermission.UPDATE_DRUGSTORE_PRODUCT.name());
 
         //DrugstoreServiceController Endpoints
         authReqConfig.requestMatchers(HttpMethod.GET, "/drugstoreService/all")
@@ -65,6 +67,8 @@ public class HttpSecurityConfiguration {
                 .hasAnyAuthority(RolePermission.REGISTER_DRUGSTORE_SERVICE.name());
         authReqConfig.requestMatchers(HttpMethod.DELETE, "/drugstoreService/deleteById/{drugstoreId}/{serviceId}")
                 .hasAnyAuthority(RolePermission.DELETE_DRUGSTORE_SERVICE.name());
+        authReqConfig.requestMatchers(HttpMethod.PUT, "/drugstoreService/edit/{drugstoreId}/{serviceId}")
+                .hasAnyAuthority(RolePermission.UPDATE_DRUGSTORE_SERVICE.name());
 
         //Product Controller Endpoints
         authReqConfig.requestMatchers(HttpMethod.GET, "/product/all")
@@ -75,10 +79,13 @@ public class HttpSecurityConfiguration {
                 .hasAnyAuthority(RolePermission.READ_PRODUCT_BY_ID.name());
         authReqConfig.requestMatchers(HttpMethod.GET, "/product/allMyProducts/{drugstoreId}")
                 .hasAnyAuthority(RolePermission.READ_ALL_MY_PRODUCTS.name());
+        authReqConfig.requestMatchers(HttpMethod.GET, "/product/all/options")
+                .hasAnyAuthority(RolePermission.READ_ALL_PRODUCT_OPTIONS.name());
         authReqConfig.requestMatchers(HttpMethod.POST, "/product/register")
                 .hasAnyAuthority(RolePermission.REGISTER_PRODUCT.name());
         authReqConfig.requestMatchers(HttpMethod.DELETE, "/product/deleteById/{id}")
                 .hasAnyAuthority(RolePermission.DELETE_PRODUCT.name());
+
 
         //Purchase Controller Endpoints
         authReqConfig.requestMatchers(HttpMethod.GET, "/purchase/all")
@@ -113,6 +120,8 @@ public class HttpSecurityConfiguration {
                 .hasAnyAuthority(RolePermission.READ_ALL_SERVICES_WITH_DETAILS.name());
         authReqConfig.requestMatchers(HttpMethod.GET, "/service/searchById/{id}")
                 .hasAnyAuthority(RolePermission.READ_SERVICE_BY_ID.name());
+        authReqConfig.requestMatchers(HttpMethod.GET, "/service/all/options")
+                .hasAnyAuthority(RolePermission.READ_ALL_SERVICE_OPTIONS.name());
         authReqConfig.requestMatchers(HttpMethod.POST, "/service/register")
                 .hasAnyAuthority(RolePermission.REGISTER_SERVICE.name());
         authReqConfig.requestMatchers(HttpMethod.DELETE, "/service/deleteById/{id}")

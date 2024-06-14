@@ -1,6 +1,8 @@
 package com.pe.botica.controller;
 
+import com.pe.botica.dto.ProductOptionDTO;
 import com.pe.botica.dto.ServiceDTO;
+import com.pe.botica.dto.ServiceOptionDTO;
 import com.pe.botica.dto.ServiceViewDTO;
 import com.pe.botica.model.Category;
 import com.pe.botica.service.CategoryService;
@@ -39,6 +41,11 @@ public class ServiceController {
     @GetMapping("/allWithDetails")
     public ResponseEntity<List<ServiceViewDTO>> getAllProductsDetails(){
         List<ServiceViewDTO> services = serviceService.findAllServices();
+        return new ResponseEntity<>(services, HttpStatus.OK);
+    }
+    @GetMapping("/all/options")
+    public ResponseEntity<List<ServiceOptionDTO>> getAllProductsOptions(){
+        List<ServiceOptionDTO> services = serviceService.findAllServiceOptions();
         return new ResponseEntity<>(services, HttpStatus.OK);
     }
     @PostMapping("/register")

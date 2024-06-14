@@ -2,6 +2,7 @@ package com.pe.botica.controller;
 
 import com.pe.botica.dto.MyProductsViewDTO;
 import com.pe.botica.dto.ProductDTO;
+import com.pe.botica.dto.ProductOptionDTO;
 import com.pe.botica.dto.ProductViewDTO;
 import com.pe.botica.model.Category;
 import com.pe.botica.model.Product;
@@ -31,6 +32,11 @@ public class ProductController {
     @GetMapping("/allWithDetails")
     public ResponseEntity<List<ProductViewDTO>> getAllProductsDetails(){
         List<ProductViewDTO> products = productService.findAllProducts();
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+    @GetMapping("/all/options")
+    public ResponseEntity<List<ProductOptionDTO>> getAllProductsOptions(){
+        List<ProductOptionDTO> products = productService.findAllProductOptions();
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
     @GetMapping("/allMyProducts/{drugstoreId}")

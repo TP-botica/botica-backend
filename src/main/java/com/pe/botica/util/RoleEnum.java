@@ -45,7 +45,11 @@ public enum RoleEnum {
             RolePermission.DELETE_DRUGSTORE_SERVICE,
             RolePermission.READ_MY_PROFILE,
             RolePermission.READ_ALL_MY_PRODUCTS,
-            RolePermission.READ_ALL_MY_SERVICES
+            RolePermission.READ_ALL_MY_SERVICES,
+            RolePermission.UPDATE_DRUGSTORE_PRODUCT,
+            RolePermission.READ_ALL_PRODUCT_OPTIONS,
+            RolePermission.UPDATE_DRUGSTORE_SERVICE,
+            RolePermission.READ_ALL_SERVICE_OPTIONS
     )),
     ROLE_CUSTOMER(Arrays.asList(
             RolePermission.READ_ALL_CATEGORIES,
@@ -85,7 +89,11 @@ public enum RoleEnum {
             RolePermission.DELETE_DRUGSTORE_SERVICE,
             RolePermission.READ_MY_PROFILE,
             RolePermission.READ_ALL_MY_PRODUCTS,
-            RolePermission.READ_ALL_MY_SERVICES
+            RolePermission.READ_ALL_MY_SERVICES,
+            RolePermission.UPDATE_DRUGSTORE_PRODUCT,
+            RolePermission.READ_ALL_PRODUCT_OPTIONS,
+            RolePermission.UPDATE_DRUGSTORE_SERVICE,
+            RolePermission.READ_ALL_SERVICE_OPTIONS
     ));
 
     private List<RolePermission> permissions;

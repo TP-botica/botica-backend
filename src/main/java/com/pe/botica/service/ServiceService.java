@@ -1,6 +1,7 @@
 package com.pe.botica.service;
 
 import com.pe.botica.dto.ProductViewDTO;
+import com.pe.botica.dto.ServiceOptionDTO;
 import com.pe.botica.dto.ServiceViewDTO;
 import com.pe.botica.model.Product;
 import com.pe.botica.repository.ServiceRepository;
@@ -20,5 +21,7 @@ public class ServiceService {
     public com.pe.botica.model.Service save( com.pe.botica.model.Service service ){ return serviceRepository.save(service); }
     public void deleteById( UUID id ){ serviceRepository.deleteById(id);}
     public List<ServiceViewDTO> findAllServices(){ return serviceRepository.getAllServices();}
-
+    public List<ServiceOptionDTO> findAllServiceOptions() {
+        return serviceRepository.getAllServiceOptions();
+    }
 }
