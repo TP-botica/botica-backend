@@ -104,6 +104,8 @@ public class HttpSecurityConfiguration {
         //PurchaseDetail Controller Endpoints
         authReqConfig.requestMatchers(HttpMethod.GET, "/purchaseDetail/all")
                 .hasAnyAuthority(RolePermission.READ_ALL_PURCHASE_DETAILS.name());
+        authReqConfig.requestMatchers(HttpMethod.GET, "/purchaseDetail/allByPurchase/{purchaseId}")
+                .hasAnyAuthority(RolePermission.READ_ALL_PURCHASE_DETAILS_BY_PURCHASE.name());
         authReqConfig.requestMatchers(HttpMethod.GET, "/purchaseDetail/searchById/{id}")
                 .hasAnyAuthority(RolePermission.READ_PURCHASE_DETAIL_BY_ID.name());
         authReqConfig.requestMatchers(HttpMethod.POST, "/purchaseDetail/register")

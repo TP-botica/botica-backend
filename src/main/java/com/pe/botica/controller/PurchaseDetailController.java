@@ -1,6 +1,7 @@
 package com.pe.botica.controller;
 
 import com.pe.botica.dto.PurchaseDetailDTO;
+import com.pe.botica.dto.PurchaseDetailViewDTO;
 import com.pe.botica.model.*;
 import com.pe.botica.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("/purchaseDetail")
 public class PurchaseDetailController {
@@ -28,6 +29,13 @@ public class PurchaseDetailController {
     @GetMapping("/all")
     public ResponseEntity<List<PurchaseDetail>> getAllPurchaseDetails(){
         List<PurchaseDetail> purchases = purchaseDetailService.findAll();
+        return new ResponseEntity<>(purchases, HttpStatus.OK);
+    }
+    @GetMapping("/allByPurchase/{purchaseId}")
+    public ResponseEntity<List<PurchaseDetailViewDTO>> getAllPurchaseDetailsByPurchase(
+            @PathVariable("purchaseId") UUID purchaseId
+    ){
+        List<PurchaseDetailViewDTO> purchases = purchaseDetailService.findAllPurchaseDetailsByPurchase(purchaseId);
         return new ResponseEntity<>(purchases, HttpStatus.OK);
     }
     @GetMapping("/searchById/{id}")
