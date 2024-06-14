@@ -90,6 +90,10 @@ public class HttpSecurityConfiguration {
         //Purchase Controller Endpoints
         authReqConfig.requestMatchers(HttpMethod.GET, "/purchase/all")
                 .hasAnyAuthority(RolePermission.READ_ALL_PURCHASES.name());
+        authReqConfig.requestMatchers(HttpMethod.GET, "/purchase/allMyPurchases/{customerId}")
+                .hasAnyAuthority(RolePermission.READ_ALL_MY_PURCHASES.name());
+        authReqConfig.requestMatchers(HttpMethod.GET, "/purchase/allMySales/{drugstoreId}")
+                .hasAnyAuthority(RolePermission.READ_ALL_MY_SALES.name());
         authReqConfig.requestMatchers(HttpMethod.GET, "/purchase/searchById/{id}")
                 .hasAnyAuthority(RolePermission.READ_PURCHASE_BY_ID.name());
         authReqConfig.requestMatchers(HttpMethod.POST, "/purchase/register")

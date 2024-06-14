@@ -1,6 +1,7 @@
 package com.pe.botica.controller;
 
 import com.pe.botica.dto.PurchaseRegisterDTO;
+import com.pe.botica.dto.PurchaseViewDTO;
 import com.pe.botica.model.Purchase;
 import com.pe.botica.model.PurchaseDetail;
 import com.pe.botica.model.User;
@@ -15,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("/purchase")
 public class PurchaseController {
@@ -33,6 +34,20 @@ public class PurchaseController {
     @GetMapping("/all")
     public ResponseEntity<List<Purchase>> getAllPurchases(){
         List<Purchase> purchases = purchaseService.findAll();
+        return new ResponseEntity<>(purchases, HttpStatus.OK);
+    }
+    @GetMapping("/allMySales/{drugstoreId}")
+    public ResponseEntity<List<PurchaseViewDTO>> getAllMySales(
+            @PathVariable("drugstoreId") UUID drugstoreId
+    ){
+        List<PurchaseViewDTO> purchases = purchaseService.findAllMySales(drugstoreId);
+        return new ResponseEntity<>(purchases, HttpStatus.OK);
+    }
+    @GetMapping("/allMyPurchases/{customerId}")
+    public ResponseEntity<List<PurchaseViewDTO>> getAllMyPurchases(
+            @PathVariable("customerId") UUID customerId
+    ){
+        List<PurchaseViewDTO> purchases = purchaseService.findAllMyPurchases(customerId);
         return new ResponseEntity<>(purchases, HttpStatus.OK);
     }
     @GetMapping("/searchById/{id}")

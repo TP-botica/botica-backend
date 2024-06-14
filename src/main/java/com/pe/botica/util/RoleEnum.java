@@ -49,7 +49,9 @@ public enum RoleEnum {
             RolePermission.UPDATE_DRUGSTORE_PRODUCT,
             RolePermission.READ_ALL_PRODUCT_OPTIONS,
             RolePermission.UPDATE_DRUGSTORE_SERVICE,
-            RolePermission.READ_ALL_SERVICE_OPTIONS
+            RolePermission.READ_ALL_SERVICE_OPTIONS,
+            RolePermission.READ_ALL_MY_SALES,
+            RolePermission.READ_ALL_MY_PURCHASES
     )),
     ROLE_CUSTOMER(Arrays.asList(
             RolePermission.READ_ALL_CATEGORIES,
@@ -70,7 +72,8 @@ public enum RoleEnum {
             RolePermission.READ_DRUGSTORE_SERVICE_BY_ID,
             RolePermission.READ_ALL_PRODUCTS_WITH_DETAILS,
             RolePermission.READ_ALL_SERVICES_WITH_DETAILS,
-            RolePermission.READ_MY_PROFILE
+            RolePermission.READ_MY_PROFILE,
+            RolePermission.READ_ALL_MY_PURCHASES
     )),
     ROLE_DRUGSTORE(Arrays.asList(
             RolePermission.READ_ALL_CATEGORIES,
@@ -93,7 +96,8 @@ public enum RoleEnum {
             RolePermission.UPDATE_DRUGSTORE_PRODUCT,
             RolePermission.READ_ALL_PRODUCT_OPTIONS,
             RolePermission.UPDATE_DRUGSTORE_SERVICE,
-            RolePermission.READ_ALL_SERVICE_OPTIONS
+            RolePermission.READ_ALL_SERVICE_OPTIONS,
+            RolePermission.READ_ALL_MY_SALES
     ));
 
     private List<RolePermission> permissions;
