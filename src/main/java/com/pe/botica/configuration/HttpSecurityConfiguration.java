@@ -122,6 +122,8 @@ public class HttpSecurityConfiguration {
                 .hasAnyAuthority(RolePermission.READ_SERVICE_BY_ID.name());
         authReqConfig.requestMatchers(HttpMethod.GET, "/service/all/options")
                 .hasAnyAuthority(RolePermission.READ_ALL_SERVICE_OPTIONS.name());
+        authReqConfig.requestMatchers(HttpMethod.GET, "/service/allMyServices/{drugstoreId}")
+                .hasAnyAuthority(RolePermission.READ_ALL_MY_SERVICES.name());
         authReqConfig.requestMatchers(HttpMethod.POST, "/service/register")
                 .hasAnyAuthority(RolePermission.REGISTER_SERVICE.name());
         authReqConfig.requestMatchers(HttpMethod.DELETE, "/service/deleteById/{id}")

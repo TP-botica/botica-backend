@@ -1,5 +1,6 @@
 package com.pe.botica.service;
 
+import com.pe.botica.dto.MyServicesViewDTO;
 import com.pe.botica.dto.ProductViewDTO;
 import com.pe.botica.dto.ServiceOptionDTO;
 import com.pe.botica.dto.ServiceViewDTO;
@@ -23,5 +24,8 @@ public class ServiceService {
     public List<ServiceViewDTO> findAllServices(){ return serviceRepository.getAllServices();}
     public List<ServiceOptionDTO> findAllServiceOptions() {
         return serviceRepository.getAllServiceOptions();
+    }
+    public List<MyServicesViewDTO> findAllMyServices(UUID drugstoreId) {
+        return serviceRepository.getAllMyServices(drugstoreId);
     }
 }

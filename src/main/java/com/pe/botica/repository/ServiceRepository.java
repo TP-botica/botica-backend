@@ -1,5 +1,6 @@
 package com.pe.botica.repository;
 
+import com.pe.botica.dto.MyServicesViewDTO;
 import com.pe.botica.dto.ServiceOptionDTO;
 import com.pe.botica.dto.ServiceViewDTO;
 import com.pe.botica.model.Service;
@@ -29,11 +30,26 @@ public interface ServiceRepository extends JpaRepository<Service, UUID> {
     public List<ServiceViewDTO> getAllServices();
 
     @Query(value = """
-             SELECT new com.pe.botica.dto.ServiceViewDTO(
+             SELECT new com.pe.botica.dto.ServiceOptionDTO(
              s.id,
              s.name
             ) from Service s
             """
     )
     List<ServiceOptionDTO> getAllServiceOptions();
+    @Query(value = """
+     SELECT new com.pe.botica.dto.MyServicesViewDTO(
+     s.id,
+     s.name,
+     s.imageUrl,
+     ds.price,
+     c.name
+    )
+    FROM Service s
+    INNER JOIN DrugstoreService ds ON s.id = ds.service.id
+    INNER JOIN Category c ON c.id = s.category.id
+    WHERE ds.user.id = :drugstoreId
+    """)
+    List<MyServicesViewDTO> getAllMyServices(UUID drugstoreId);
+
 }

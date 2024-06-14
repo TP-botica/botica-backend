@@ -1,10 +1,8 @@
 package com.pe.botica.controller;
 
-import com.pe.botica.dto.DrugstoreProductEditableDTO;
 import com.pe.botica.dto.DrugstoreServiceDTO;
 import com.pe.botica.dto.DrugstoreServiceEditableDTO;
 import com.pe.botica.model.*;
-import com.pe.botica.model.compoundId.DrugstoreProductId;
 import com.pe.botica.model.compoundId.DrugstoreServiceId;
 import com.pe.botica.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("/drugstoreService")
 public class DrugstoreServiceController {

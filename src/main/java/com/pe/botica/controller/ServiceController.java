@@ -1,6 +1,6 @@
 package com.pe.botica.controller;
 
-import com.pe.botica.dto.ProductOptionDTO;
+import com.pe.botica.dto.MyServicesViewDTO;
 import com.pe.botica.dto.ServiceDTO;
 import com.pe.botica.dto.ServiceOptionDTO;
 import com.pe.botica.dto.ServiceViewDTO;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("/service")
 public class ServiceController {
@@ -41,6 +41,13 @@ public class ServiceController {
     @GetMapping("/allWithDetails")
     public ResponseEntity<List<ServiceViewDTO>> getAllProductsDetails(){
         List<ServiceViewDTO> services = serviceService.findAllServices();
+        return new ResponseEntity<>(services, HttpStatus.OK);
+    }
+    @GetMapping("/allMyServices/{drugstoreId}")
+    public ResponseEntity<List<MyServicesViewDTO>> getAllMyServices(
+            @PathVariable("drugstoreId") UUID drugstoreId
+    ){
+        List<MyServicesViewDTO> services = serviceService.findAllMyServices(drugstoreId);
         return new ResponseEntity<>(services, HttpStatus.OK);
     }
     @GetMapping("/all/options")
