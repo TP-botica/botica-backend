@@ -1,10 +1,7 @@
 package com.pe.botica.service;
 
-import com.pe.botica.model.DrugstoreProduct;
 import com.pe.botica.model.DrugstoreService;
-import com.pe.botica.model.compoundId.DrugstoreProductId;
 import com.pe.botica.model.compoundId.DrugstoreServiceId;
-import com.pe.botica.repository.DrugstoreProductRepository;
 import com.pe.botica.repository.DrugstoreServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
