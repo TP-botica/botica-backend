@@ -1,9 +1,9 @@
 package com.pe.botica.controller;
 
 import com.pe.botica.dto.MyServicesViewDTO;
+import com.pe.botica.dto.OptionDTO;
+import com.pe.botica.dto.ProductServiceViewDTO;
 import com.pe.botica.dto.ServiceDTO;
-import com.pe.botica.dto.ServiceOptionDTO;
-import com.pe.botica.dto.ServiceViewDTO;
 import com.pe.botica.model.Category;
 import com.pe.botica.service.CategoryService;
 import com.pe.botica.service.ServiceService;
@@ -24,8 +24,15 @@ public class ServiceController {
     @Autowired
     private CategoryService categoryService;
     @GetMapping("/all")
-    public ResponseEntity<List<com.pe.botica.model.Service>> getAllServices(){
-        List<com.pe.botica.model.Service> services = serviceService.findAll();
+    public ResponseEntity<List<ProductServiceViewDTO>> getAllServices(){
+        List<ProductServiceViewDTO> services = serviceService.findAll();
+        return new ResponseEntity<>(services, HttpStatus.OK);
+    }
+    @GetMapping("/allByCategory/{categoryId}")
+    public ResponseEntity<List<ProductServiceViewDTO>> getAllServicesByCategory(
+            @PathVariable("categoryId") UUID categoryId
+    ){
+        List<ProductServiceViewDTO> services = serviceService.findAllByCategory(categoryId);
         return new ResponseEntity<>(services, HttpStatus.OK);
     }
     @GetMapping("/searchById/{id}")
@@ -38,11 +45,6 @@ public class ServiceController {
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-    @GetMapping("/allWithDetails")
-    public ResponseEntity<List<ServiceViewDTO>> getAllProductsDetails(){
-        List<ServiceViewDTO> services = serviceService.findAllServices();
-        return new ResponseEntity<>(services, HttpStatus.OK);
-    }
     @GetMapping("/allMyServices/{drugstoreId}")
     public ResponseEntity<List<MyServicesViewDTO>> getAllMyServices(
             @PathVariable("drugstoreId") UUID drugstoreId
@@ -51,8 +53,8 @@ public class ServiceController {
         return new ResponseEntity<>(services, HttpStatus.OK);
     }
     @GetMapping("/all/options")
-    public ResponseEntity<List<ServiceOptionDTO>> getAllProductsOptions(){
-        List<ServiceOptionDTO> services = serviceService.findAllServiceOptions();
+    public ResponseEntity<List<OptionDTO>> getAllProductsOptions(){
+        List<OptionDTO> services = serviceService.findAllServiceOptions();
         return new ResponseEntity<>(services, HttpStatus.OK);
     }
     @PostMapping("/register")

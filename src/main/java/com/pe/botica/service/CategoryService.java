@@ -1,5 +1,6 @@
 package com.pe.botica.service;
 
+import com.pe.botica.dto.OptionDTO;
 import com.pe.botica.model.Category;
 import com.pe.botica.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,4 +18,11 @@ public class CategoryService {
     public Optional<Category> findById(UUID id ) { return categoryRepository.findById(id);}
     public Category save( Category category ){ return categoryRepository.save(category); }
     public void deleteById( UUID id ){ categoryRepository.deleteById(id);}
+
+    public List<OptionDTO> findAllProductOptions() {
+        return categoryRepository.getAllCategoryProductOptions();
+    }
+    public List<OptionDTO> findAllServiceOptions() {
+        return categoryRepository.getAllCategoryServiceOptions();
+    }
 }

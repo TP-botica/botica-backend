@@ -1,8 +1,8 @@
 package com.pe.botica.repository;
 
 import com.pe.botica.dto.MyProductsViewDTO;
-import com.pe.botica.dto.ProductOptionDTO;
-import com.pe.botica.dto.ProductViewDTO;
+import com.pe.botica.dto.OptionDTO;
+import com.pe.botica.dto.ProductServiceViewDTO;
 import com.pe.botica.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,22 +15,28 @@ import java.util.UUID;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, UUID> {
     @Query(value = """
-             SELECT new com.pe.botica.dto.ProductViewDTO(
-             p.name,
-             p.description,
-             dp.price,
-             p.prescriptionRequired,
-             u.name,
-             p.imageUrl,
-             dp.stock
-            ) from Product p
-              inner join DrugstoreProduct dp
-              on p.id = dp.product.id
-              inner join User u
-              on dp.user.id = u.id
-            """)
-    public List<ProductViewDTO> getAllProducts();
-
+    SELECT new com.pe.botica.dto.ProductServiceViewDTO(
+        p.id,
+        p.name,
+        p.imageUrl,
+        c.name
+    )
+    FROM Product p
+    INNER JOIN p.category c
+    """)
+    public List<ProductServiceViewDTO> getAllProducts();
+    @Query(value = """
+    SELECT new com.pe.botica.dto.ProductServiceViewDTO(
+        p.id,
+        p.name,
+        p.imageUrl,
+        c.name
+    )
+    FROM Product p
+    INNER JOIN p.category c
+    WHERE c.id = :categoryId
+    """)
+    public List<ProductServiceViewDTO> getProductsByCategory(UUID categoryId);
 
     @Query(value = """
          SELECT new com.pe.botica.dto.MyProductsViewDTO(
@@ -49,12 +55,12 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
     public List<MyProductsViewDTO> getAllMyProducts(@Param("drugstoreId") UUID drugstoreId);
 
     @Query(value = """
-         SELECT new com.pe.botica.dto.ProductOptionDTO(
+         SELECT new com.pe.botica.dto.OptionDTO(
          p.id,
          p.name
         )
         FROM Product p
         """)
-    public List<ProductOptionDTO> getAllProductOptions();
+    public List<OptionDTO> getAllProductOptions();
 
 }

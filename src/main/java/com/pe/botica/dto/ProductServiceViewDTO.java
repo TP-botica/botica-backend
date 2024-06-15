@@ -9,7 +9,9 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ProductOptionDTO {
+public class ProductServiceViewDTO {
     private UUID id;
     private String name;
+    private String imageUrl;
+    private String category;
 }

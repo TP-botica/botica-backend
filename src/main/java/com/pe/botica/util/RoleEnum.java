@@ -52,7 +52,10 @@ public enum RoleEnum {
             RolePermission.READ_ALL_SERVICE_OPTIONS,
             RolePermission.READ_ALL_MY_SALES,
             RolePermission.READ_ALL_MY_PURCHASES,
-            RolePermission.READ_ALL_PURCHASE_DETAILS_BY_PURCHASE
+            RolePermission.READ_ALL_PURCHASE_DETAILS_BY_PURCHASE,
+            RolePermission.READ_ALL_SERVICES_BY_CATEGORY,
+            RolePermission.READ_ALL_PRODUCTS_BY_CATEGORY,
+            RolePermission.READ_ALL_CATEGORY_OPTIONS
     )),
     ROLE_CUSTOMER(Arrays.asList(
             RolePermission.READ_ALL_CATEGORIES,
@@ -75,14 +78,15 @@ public enum RoleEnum {
             RolePermission.READ_ALL_SERVICES_WITH_DETAILS,
             RolePermission.READ_MY_PROFILE,
             RolePermission.READ_ALL_MY_PURCHASES,
-            RolePermission.READ_ALL_PURCHASE_DETAILS_BY_PURCHASE
+            RolePermission.READ_ALL_PURCHASE_DETAILS_BY_PURCHASE,
+            RolePermission.READ_ALL_SERVICES_BY_CATEGORY,
+            RolePermission.READ_ALL_PRODUCTS_BY_CATEGORY,
+            RolePermission.READ_ALL_CATEGORY_OPTIONS
     )),
     ROLE_DRUGSTORE(Arrays.asList(
             RolePermission.READ_ALL_CATEGORIES,
             RolePermission.READ_CATEGORY_BY_ID,
-            RolePermission.READ_ALL_PRODUCTS,
             RolePermission.READ_PRODUCT_BY_ID,
-            RolePermission.READ_ALL_SERVICES,
             RolePermission.READ_SERVICE_BY_ID,
             RolePermission.READ_ALL_DRUGSTORE_PRODUCTS,
             RolePermission.READ_DRUGSTORE_PRODUCT_BY_ID,

@@ -9,7 +9,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ServiceOptionDTO {
+public class OptionDTO {
     private UUID id;
     private String name;
 }

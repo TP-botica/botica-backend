@@ -1,9 +1,9 @@
 package com.pe.botica.controller;
 
 import com.pe.botica.dto.MyProductsViewDTO;
+import com.pe.botica.dto.OptionDTO;
 import com.pe.botica.dto.ProductDTO;
-import com.pe.botica.dto.ProductOptionDTO;
-import com.pe.botica.dto.ProductViewDTO;
+import com.pe.botica.dto.ProductServiceViewDTO;
 import com.pe.botica.model.Category;
 import com.pe.botica.model.Product;
 import com.pe.botica.service.CategoryService;
@@ -25,18 +25,20 @@ public class ProductController {
     @Autowired
     private CategoryService categoryService;
     @GetMapping("/all")
-    public ResponseEntity<List<Product>> getAllProducts(){
-        List<Product> products = productService.findAll();
+    public ResponseEntity<List<ProductServiceViewDTO>> getAllProducts(){
+        List<ProductServiceViewDTO> products = productService.findAll();
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
-    @GetMapping("/allWithDetails")
-    public ResponseEntity<List<ProductViewDTO>> getAllProductsDetails(){
-        List<ProductViewDTO> products = productService.findAllProducts();
+    @GetMapping("/allByCategory/{categoryId}")
+    public ResponseEntity<List<ProductServiceViewDTO>> getAllProductsByCategory(
+            @PathVariable("categoryId") UUID categoryId
+    ){
+        List<ProductServiceViewDTO> products = productService.findAllByCategory(categoryId);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
     @GetMapping("/all/options")
-    public ResponseEntity<List<ProductOptionDTO>> getAllProductsOptions(){
-        List<ProductOptionDTO> products = productService.findAllProductOptions();
+    public ResponseEntity<List<OptionDTO>> getAllProductsOptions(){
+        List<OptionDTO> products = productService.findAllProductOptions();
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
     @GetMapping("/allMyProducts/{drugstoreId}")
@@ -46,7 +48,7 @@ public class ProductController {
         List<MyProductsViewDTO> products = productService.findAllMyProducts(drugstoreId);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
-    @GetMapping("/searchById/{id}")
+    @GetMapping("/searchById/{id}") //Editar: mostrar detalle de producto y detalle en cada botica como precio y stock
     public ResponseEntity<Optional<Product>> findById(
             @PathVariable("id") UUID id
             ){

@@ -1,6 +1,5 @@
 package com.pe.botica.repository;
 
-import com.pe.botica.dto.ProductOptionDTO;
 import com.pe.botica.dto.PurchaseViewDTO;
 import com.pe.botica.model.Purchase;
 import org.springframework.data.jpa.repository.JpaRepository;

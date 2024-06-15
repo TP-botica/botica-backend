@@ -1,5 +1,6 @@
 package com.pe.botica.controller;
 
+import com.pe.botica.dto.OptionDTO;
 import com.pe.botica.model.Category;
 import com.pe.botica.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,16 @@ public class CategoryController {
     @GetMapping("/all")
     public ResponseEntity<List<Category>> getAllCategories(){
         List<Category> categories = categoryService.findAll();
+        return new ResponseEntity<>(categories, HttpStatus.OK);
+    }
+    @GetMapping("/all/productOptions")
+    public ResponseEntity<List<OptionDTO>> getAllCategoryProductOptions(){
+        List<OptionDTO> categories = categoryService.findAllProductOptions();
+        return new ResponseEntity<>(categories, HttpStatus.OK);
+    }
+    @GetMapping("/all/serviceOptions")
+    public ResponseEntity<List<OptionDTO>> getAllCategoryServiceOptions(){
+        List<OptionDTO> categories = categoryService.findAllServiceOptions();
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
     @GetMapping("/searchById/{id}")

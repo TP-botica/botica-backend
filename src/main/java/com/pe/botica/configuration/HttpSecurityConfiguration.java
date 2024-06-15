@@ -45,6 +45,10 @@ public class HttpSecurityConfiguration {
                 .hasAnyAuthority(RolePermission.REGISTER_CATEGORY.name());
         authReqConfig.requestMatchers(HttpMethod.DELETE, "/category/deleteById/{id}")
                 .hasAnyAuthority(RolePermission.DELETE_CATEGORY.name());
+        authReqConfig.requestMatchers(HttpMethod.GET, "/category/all/productOptions")
+                .hasAnyAuthority(RolePermission.READ_ALL_CATEGORY_OPTIONS.name());
+        authReqConfig.requestMatchers(HttpMethod.GET, "/category/all/serviceOptions")
+                .hasAnyAuthority(RolePermission.READ_ALL_CATEGORY_OPTIONS.name());
 
         //DrugstoreProduct Controller Endpoints
         authReqConfig.requestMatchers(HttpMethod.GET, "/drugstoreProduct/all")
@@ -73,6 +77,8 @@ public class HttpSecurityConfiguration {
         //Product Controller Endpoints
         authReqConfig.requestMatchers(HttpMethod.GET, "/product/all")
                         .hasAnyAuthority(RolePermission.READ_ALL_PRODUCTS.name());
+        authReqConfig.requestMatchers(HttpMethod.GET, "/product/allByCategory/{categoryId}")
+                .hasAnyAuthority(RolePermission.READ_ALL_PRODUCTS_BY_CATEGORY.name());
         authReqConfig.requestMatchers(HttpMethod.GET, "/product/allWithDetails")
                 .hasAnyAuthority(RolePermission.READ_ALL_PRODUCTS.name());
         authReqConfig.requestMatchers(HttpMethod.GET, "/product/searchById/{id}")
@@ -122,6 +128,8 @@ public class HttpSecurityConfiguration {
         //Service Controller Endpoints
         authReqConfig.requestMatchers(HttpMethod.GET, "/service/all")
                 .hasAnyAuthority(RolePermission.READ_ALL_SERVICES.name());
+        authReqConfig.requestMatchers(HttpMethod.GET, "/service/allByCategory/{categoryId}")
+                .hasAnyAuthority(RolePermission.READ_ALL_SERVICES_BY_CATEGORY.name());
         authReqConfig.requestMatchers(HttpMethod.GET, "/service/allWithDetails")
                 .hasAnyAuthority(RolePermission.READ_ALL_SERVICES_WITH_DETAILS.name());
         authReqConfig.requestMatchers(HttpMethod.GET, "/service/searchById/{id}")
