@@ -1,9 +1,6 @@
 package com.pe.botica.controller;
 
-import com.pe.botica.dto.MyServicesViewDTO;
-import com.pe.botica.dto.OptionDTO;
-import com.pe.botica.dto.ProductServiceViewDTO;
-import com.pe.botica.dto.ServiceDTO;
+import com.pe.botica.dto.*;
 import com.pe.botica.model.Category;
 import com.pe.botica.service.CategoryService;
 import com.pe.botica.service.ServiceService;
@@ -36,13 +33,10 @@ public class ServiceController {
         return new ResponseEntity<>(services, HttpStatus.OK);
     }
     @GetMapping("/searchById/{id}")
-    public ResponseEntity<Optional<com.pe.botica.model.Service>> findById(
+    public ResponseEntity<ServiceDetailDTO> findById(
             @PathVariable("id") UUID id
             ){
-        var response = serviceService.findById(id);
-        if(response.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        var response = serviceService.getDetailsById(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @GetMapping("/allMyServices/{drugstoreId}")

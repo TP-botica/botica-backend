@@ -1,5 +1,7 @@
 package com.pe.botica.util;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+
 public enum RolePermission {
     READ_ALL_CATEGORIES,
     READ_ALL_CATEGORY_OPTIONS,
@@ -61,6 +63,7 @@ public enum RolePermission {
     REGISTER_DRUGSTORE_PRODUCT,
     UPDATE_DRUGSTORE_PRODUCT,
     DELETE_DRUGSTORE_PRODUCT,
+    READ_ALL_DRUGSTORE_LOCATIONS,
 
 
     READ_ALL_DRUGSTORE_SERVICES,

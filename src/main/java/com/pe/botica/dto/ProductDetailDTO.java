@@ -9,9 +9,10 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
-public class DrugstoreLocationsDTO {
-    private UUID drugstoreId;
+public class ProductDetailDTO {
     private String name;
-    private String latitude;
-    private String longitude;
+    private String description;
+    private Boolean prescriptionRequired;
+    private String imageUrl;
+    private String category;
 }

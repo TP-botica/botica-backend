@@ -55,7 +55,8 @@ public enum RoleEnum {
             RolePermission.READ_ALL_PURCHASE_DETAILS_BY_PURCHASE,
             RolePermission.READ_ALL_SERVICES_BY_CATEGORY,
             RolePermission.READ_ALL_PRODUCTS_BY_CATEGORY,
-            RolePermission.READ_ALL_CATEGORY_OPTIONS
+            RolePermission.READ_ALL_CATEGORY_OPTIONS,
+            RolePermission.READ_ALL_DRUGSTORE_LOCATIONS
     )),
     ROLE_CUSTOMER(Arrays.asList(
             RolePermission.READ_ALL_CATEGORIES,
@@ -81,7 +82,8 @@ public enum RoleEnum {
             RolePermission.READ_ALL_PURCHASE_DETAILS_BY_PURCHASE,
             RolePermission.READ_ALL_SERVICES_BY_CATEGORY,
             RolePermission.READ_ALL_PRODUCTS_BY_CATEGORY,
-            RolePermission.READ_ALL_CATEGORY_OPTIONS
+            RolePermission.READ_ALL_CATEGORY_OPTIONS,
+            RolePermission.READ_ALL_DRUGSTORE_LOCATIONS
     )),
     ROLE_DRUGSTORE(Arrays.asList(
             RolePermission.READ_ALL_CATEGORIES,

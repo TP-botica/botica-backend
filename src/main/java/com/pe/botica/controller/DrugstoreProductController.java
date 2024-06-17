@@ -1,7 +1,9 @@
 package com.pe.botica.controller;
 
+import com.pe.botica.dto.DrugstoreLocationsDTO;
 import com.pe.botica.dto.DrugstoreProductDTO;
 import com.pe.botica.dto.DrugstoreProductEditableDTO;
+import com.pe.botica.dto.DrugstoreProductViewDTO;
 import com.pe.botica.model.DrugstoreProduct;
 import com.pe.botica.model.Product;
 import com.pe.botica.model.User;
@@ -33,16 +35,19 @@ public class DrugstoreProductController {
         List<DrugstoreProduct> drugstoreProducts = drugstoreProductService.findAll();
         return new ResponseEntity<>(drugstoreProducts, HttpStatus.OK);
     }
+    @GetMapping("/locations/{productId}")
+    public ResponseEntity<List<DrugstoreLocationsDTO>> getAllDrugstoreLocations(
+            @PathVariable("productId") UUID productId
+    ){
+        List<DrugstoreLocationsDTO> drugstoreLocations= drugstoreProductService.findDrugstoreLocations(productId);
+        return new ResponseEntity<>(drugstoreLocations, HttpStatus.OK);
+    }
     @GetMapping("/searchById/{drugstoreId}/{productId}")
-    public ResponseEntity<Optional<DrugstoreProduct>> findById(
+    public ResponseEntity<DrugstoreProductViewDTO> findById(
             @PathVariable("drugstoreId") UUID drugstoreId,
             @PathVariable("productId") UUID productId
             ){
-        DrugstoreProductId id = new DrugstoreProductId(productId, drugstoreId);
-        var response = drugstoreProductService.findById(id);
-        if(response.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        var response = drugstoreProductService.getDetailsById(drugstoreId, productId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @PostMapping("/register")

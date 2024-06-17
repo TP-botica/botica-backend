@@ -1,11 +1,10 @@
 package com.pe.botica.repository;
 
-import com.pe.botica.dto.MyServicesViewDTO;
-import com.pe.botica.dto.OptionDTO;
-import com.pe.botica.dto.ProductServiceViewDTO;
+import com.pe.botica.dto.*;
 import com.pe.botica.model.Service;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -58,5 +57,17 @@ public interface ServiceRepository extends JpaRepository<Service, UUID> {
     WHERE ds.user.id = :drugstoreId
     """)
     List<MyServicesViewDTO> getAllMyServices(UUID drugstoreId);
+
+    @Query(value = """
+        SELECT new com.pe.botica.dto.ServiceDetailDTO(
+         s.name,
+         s.description,
+         s.imageUrl,
+         s.category.name
+        )
+        FROM Service s
+        WHERE s.id = :serviceId
+        """)
+    public ServiceDetailDTO getServiceDetailsById(@Param("serviceId") UUID serviceId);
 
 }

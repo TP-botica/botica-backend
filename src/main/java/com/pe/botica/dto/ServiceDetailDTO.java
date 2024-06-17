@@ -4,14 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Getter
 @Setter
 @AllArgsConstructor
-public class DrugstoreLocationsDTO {
-    private UUID drugstoreId;
+public class ServiceDetailDTO {
     private String name;
-    private String latitude;
-    private String longitude;
+    private String description;
+    private String imageUrl;
+    private String category;
 }

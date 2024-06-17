@@ -1,9 +1,6 @@
 package com.pe.botica.controller;
 
-import com.pe.botica.dto.MyProductsViewDTO;
-import com.pe.botica.dto.OptionDTO;
-import com.pe.botica.dto.ProductDTO;
-import com.pe.botica.dto.ProductServiceViewDTO;
+import com.pe.botica.dto.*;
 import com.pe.botica.model.Category;
 import com.pe.botica.model.Product;
 import com.pe.botica.service.CategoryService;
@@ -48,14 +45,11 @@ public class ProductController {
         List<MyProductsViewDTO> products = productService.findAllMyProducts(drugstoreId);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
-    @GetMapping("/searchById/{id}") //Editar: mostrar detalle de producto y detalle en cada botica como precio y stock
-    public ResponseEntity<Optional<Product>> findById(
+    @GetMapping("/searchById/{id}")
+    public ResponseEntity<ProductDetailDTO> findById(
             @PathVariable("id") UUID id
             ){
-        var response = productService.findById(id);
-        if(response.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        var response = productService.getProductDetailsById(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @PostMapping("/register")

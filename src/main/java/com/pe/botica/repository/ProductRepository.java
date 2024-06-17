@@ -2,6 +2,7 @@ package com.pe.botica.repository;
 
 import com.pe.botica.dto.MyProductsViewDTO;
 import com.pe.botica.dto.OptionDTO;
+import com.pe.botica.dto.ProductDetailDTO;
 import com.pe.botica.dto.ProductServiceViewDTO;
 import com.pe.botica.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -55,12 +56,23 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
     public List<MyProductsViewDTO> getAllMyProducts(@Param("drugstoreId") UUID drugstoreId);
 
     @Query(value = """
-         SELECT new com.pe.botica.dto.OptionDTO(
+        SELECT new com.pe.botica.dto.OptionDTO(
          p.id,
          p.name
         )
         FROM Product p
         """)
     public List<OptionDTO> getAllProductOptions();
-
+    @Query(value = """
+        SELECT new com.pe.botica.dto.ProductDetailDTO(
+         p.name,
+         p.description,
+         p.prescriptionRequired,
+         p.imageUrl,
+         p.category.name
+        )
+        FROM Product p
+        WHERE p.id = :productId
+        """)
+    public ProductDetailDTO getProductDetailsById(@Param("productId") UUID productId);
 }

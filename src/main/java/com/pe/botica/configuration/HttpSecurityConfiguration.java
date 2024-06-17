@@ -53,6 +53,8 @@ public class HttpSecurityConfiguration {
         //DrugstoreProduct Controller Endpoints
         authReqConfig.requestMatchers(HttpMethod.GET, "/drugstoreProduct/all")
                 .hasAnyAuthority(RolePermission.READ_ALL_DRUGSTORE_PRODUCTS.name());
+        authReqConfig.requestMatchers(HttpMethod.GET, "/drugstoreProduct/locations/{productId}")
+                .hasAnyAuthority(RolePermission.READ_ALL_DRUGSTORE_LOCATIONS.name());
         authReqConfig.requestMatchers(HttpMethod.GET, "/drugstoreProduct/searchById/{drugstoreId}/{productId}")
                 .hasAnyAuthority(RolePermission.READ_DRUGSTORE_PRODUCT_BY_ID.name());
         authReqConfig.requestMatchers(HttpMethod.POST, "/drugstoreProduct/register")
@@ -65,6 +67,8 @@ public class HttpSecurityConfiguration {
         //DrugstoreServiceController Endpoints
         authReqConfig.requestMatchers(HttpMethod.GET, "/drugstoreService/all")
                 .hasAnyAuthority(RolePermission.READ_ALL_DRUGSTORE_SERVICES.name());
+        authReqConfig.requestMatchers(HttpMethod.GET, "/drugstoreService/locations/{serviceId}")
+                .hasAnyAuthority(RolePermission.READ_ALL_DRUGSTORE_LOCATIONS.name());
         authReqConfig.requestMatchers(HttpMethod.GET, "/drugstoreService/searchById/{drugstoreId}/{serviceId}")
                 .hasAnyAuthority(RolePermission.READ_DRUGSTORE_SERVICE_BY_ID.name());
         authReqConfig.requestMatchers(HttpMethod.POST, "/drugstoreService/register")
