@@ -33,16 +33,6 @@ public class CategoryController {
         List<OptionDTO> categories = categoryService.findAllServiceOptions();
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
-    @GetMapping("/searchById/{id}")
-    public ResponseEntity<Optional<Category>> findById(
-            @PathVariable("id") UUID id
-            ){
-        var response = categoryService.findById(id);
-        if(response.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
     @PostMapping("/register")
     public ResponseEntity<Category> addCategory( @RequestBody Category category ){
         Category newCategory = categoryService.save(category);

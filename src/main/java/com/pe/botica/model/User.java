@@ -21,11 +21,11 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @Column(name = "name", length = 100)
+    @Column(name = "name", length = 100, nullable = false)
     private String name;
-    @Column(name = "email", unique = true)
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
-    @Column(name = "password", length = 100)
+    @Column(name = "password", length = 100, nullable = false)
     private String password;
     @Column(name = "latitude")
     private String latitude;
@@ -34,7 +34,7 @@ public class User implements UserDetails {
     @Column(name = "account_number")
     private String accountNumber;
     @ManyToOne
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = "role_id", nullable = false)
     @JsonBackReference(value = "role-user")
     private Role role;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
