@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-@CrossOrigin(origins = {"http://localhost:4200", "http://angular-bucket-app-2.s3-website-us-east-1.amazonaws.com"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://dfofszpxxxtk5.cloudfront.net", "https://medifinderperu.com"})
 @RestController
 @RequestMapping("/service")
 public class ServiceController {
