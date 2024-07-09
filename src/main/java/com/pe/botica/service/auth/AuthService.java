@@ -2,7 +2,7 @@ package com.pe.botica.service.auth;
 
 import com.pe.botica.dto.auth.AuthenticationResponseDTO;
 import com.pe.botica.dto.auth.UserLoginDTO;
-import com.pe.botica.model.User;
+import com.pe.botica.model.security.User;
 import com.pe.botica.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,7 +26,7 @@ public class AuthService {
     private Map<String,Object> generateExtraClaims(User user){
         Map<String,Object> extraClaims = new HashMap<>();
         extraClaims.put("name", user.getEmail());
-        extraClaims.put("role", user.getRoleEnum().name());
+        extraClaims.put("role", user.getRole().getName());
         extraClaims.put("authorities", user.getAuthorities());
         return extraClaims;
     }

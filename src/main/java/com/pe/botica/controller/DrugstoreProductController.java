@@ -6,7 +6,7 @@ import com.pe.botica.dto.DrugstoreProductEditableDTO;
 import com.pe.botica.dto.DrugstoreProductViewDTO;
 import com.pe.botica.model.DrugstoreProduct;
 import com.pe.botica.model.Product;
-import com.pe.botica.model.User;
+import com.pe.botica.model.security.User;
 import com.pe.botica.model.compoundId.DrugstoreProductId;
 import com.pe.botica.service.DrugstoreProductService;
 import com.pe.botica.service.ProductService;

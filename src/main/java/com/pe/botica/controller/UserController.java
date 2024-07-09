@@ -4,8 +4,8 @@ import com.pe.botica.dto.UserDataDTO;
 import com.pe.botica.dto.auth.AuthenticationResponseDTO;
 import com.pe.botica.dto.UserDTO;
 import com.pe.botica.dto.auth.UserLoginDTO;
-import com.pe.botica.model.Role;
-import com.pe.botica.model.User;
+import com.pe.botica.model.security.Role;
+import com.pe.botica.model.security.User;
 import com.pe.botica.service.RoleService;
 import com.pe.botica.service.UserService;
 import com.pe.botica.service.auth.AuthService;
@@ -55,7 +55,6 @@ public class UserController {
         userData.setId(user.getId());
         userData.setEmail(user.getEmail());
         userData.setName(user.getName());
-        userData.setRoleEnum(user.getRoleEnum());
         return new ResponseEntity<>(userData, HttpStatus.OK);
     }
     @PostMapping("/register")
@@ -68,15 +67,7 @@ public class UserController {
             user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
             user.setLatitude(userDTO.getLatitude());
             user.setLongitude(userDTO.getLongitude());
-            role.ifPresent(r->{
-                if (r.getId().toString().equals("6a3fc03b-7e5c-4e0a-83e4-589f50770b59")) {
-                    user.setRoleEnum(RoleEnum.ROLE_CUSTOMER);
-                }
-                if (r.getId().toString().equals("f4cf77c4-f3db-4021-9340-3f22cc4dd2e1")) {
-                    user.setRoleEnum(RoleEnum.ROLE_DRUGSTORE);
-                }
-                user.setRole(r);
-            });
+            role.ifPresent(user::setRole);
             if(userDTO.getAccountNumber()!= null){
                 user.setAccountNumber(userDTO.getAccountNumber());
             }

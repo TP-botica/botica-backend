@@ -12,5 +12,4 @@ public class UserDataDTO {
     private UUID id;
     private String name;
     private String email;
-    private RoleEnum roleEnum;
 }

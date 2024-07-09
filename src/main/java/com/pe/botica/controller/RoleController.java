@@ -1,7 +1,7 @@
 package com.pe.botica.controller;
 
 import com.pe.botica.dto.RoleDTO;
-import com.pe.botica.model.Role;
+import com.pe.botica.model.security.Role;
 import com.pe.botica.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,8 +1,6 @@
 package com.pe.botica.util;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-
-public enum RolePermission {
+public enum RolePermissionEnum {
     READ_ALL_CATEGORIES,
     READ_ALL_CATEGORY_OPTIONS,
     READ_CATEGORY_BY_ID,

@@ -1,7 +1,7 @@
 package com.pe.botica.repository;
 
 import com.pe.botica.dto.RoleDTO;
-import com.pe.botica.model.Role;
+import com.pe.botica.model.security.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

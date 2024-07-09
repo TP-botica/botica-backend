@@ -1,6 +1,6 @@
 package com.pe.botica.service;
 
-import com.pe.botica.model.User;
+import com.pe.botica.model.security.User;
 import com.pe.botica.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

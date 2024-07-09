@@ -4,7 +4,7 @@ import com.pe.botica.dto.PurchaseRegisterDTO;
 import com.pe.botica.dto.PurchaseViewDTO;
 import com.pe.botica.model.Purchase;
 import com.pe.botica.model.PurchaseDetail;
-import com.pe.botica.model.User;
+import com.pe.botica.model.security.User;
 import com.pe.botica.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

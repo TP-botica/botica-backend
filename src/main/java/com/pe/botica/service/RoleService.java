@@ -1,7 +1,7 @@
 package com.pe.botica.service;
 
 import com.pe.botica.dto.RoleDTO;
-import com.pe.botica.model.Role;
+import com.pe.botica.model.security.Role;
 import com.pe.botica.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

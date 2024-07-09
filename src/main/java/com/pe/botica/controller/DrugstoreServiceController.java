@@ -6,6 +6,7 @@ import com.pe.botica.dto.DrugstoreServiceEditableDTO;
 import com.pe.botica.dto.DrugstoreServiceViewDTO;
 import com.pe.botica.model.*;
 import com.pe.botica.model.compoundId.DrugstoreServiceId;
+import com.pe.botica.model.security.User;
 import com.pe.botica.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,6 @@
 package com.pe.botica.repository;
 
-import com.pe.botica.model.User;
+import com.pe.botica.model.security.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

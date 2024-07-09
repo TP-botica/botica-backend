@@ -2,6 +2,7 @@ package com.pe.botica.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.pe.botica.model.compoundId.DrugstoreServiceId;
+import com.pe.botica.model.security.User;
 import jakarta.persistence.*;
 import lombok.Data;
 

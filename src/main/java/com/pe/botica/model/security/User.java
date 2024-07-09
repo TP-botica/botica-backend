@@ -1,8 +1,10 @@
-package com.pe.botica.model;
+package com.pe.botica.model.security;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.pe.botica.util.RoleEnum;
+import com.pe.botica.model.DrugstoreProduct;
+import com.pe.botica.model.DrugstoreService;
+import com.pe.botica.model.Purchase;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -50,16 +52,13 @@ public class User implements UserDetails {
     @JsonManagedReference(value = "drugstore-purchase")
     private List<Purchase> drugstorePurchases;
 
-    @Enumerated(EnumType.STRING)
-    private RoleEnum roleEnum;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(roleEnum == null) return null;
-        if(roleEnum.getPermissions() == null) return null;
+        if(role == null) return null;
+        if(role.getPermissions() == null) return null;
 
-        return roleEnum.getPermissions().stream()
-                .map(Enum::name)
+        return role.getPermissions().stream()
+                .map(each -> each.getOperation().getName())
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 

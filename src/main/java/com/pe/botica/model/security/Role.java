@@ -1,6 +1,7 @@
-package com.pe.botica.model;
+package com.pe.botica.model.security;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.pe.botica.model.security.User;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,4 +20,7 @@ public class Role {
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "role-user")
     private List<User> users;
+    @OneToMany(mappedBy = "role", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "role-permission")
+    private List<GrantedPermission> permissions;
 }
