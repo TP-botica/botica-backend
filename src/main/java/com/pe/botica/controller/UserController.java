@@ -55,6 +55,7 @@ public class UserController {
         userData.setId(user.getId());
         userData.setEmail(user.getEmail());
         userData.setName(user.getName());
+        userData.setRole(user.getRole().getName());
         return new ResponseEntity<>(userData, HttpStatus.OK);
     }
     @PostMapping("/register")

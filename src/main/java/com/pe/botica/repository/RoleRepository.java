@@ -17,7 +17,7 @@ public interface RoleRepository extends JpaRepository<Role, UUID> {
                  r.name
              )
              FROM Role r
-             WHERE r.name != 'admin'
+             WHERE r.name != 'ROLE_ADMINISTRATOR'
             """
     )
     public List<RoleDTO> getRoles();

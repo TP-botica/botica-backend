@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 @CrossOrigin(origins = {"http://localhost:4200", "https://dfofszpxxxtk5.cloudfront.net", "https://medifinderperu.com"})
 @RestController
 @RequestMapping("/role")
@@ -24,10 +26,20 @@ public class RoleController {
         return new ResponseEntity<>(roles, HttpStatus.OK);
     }
     @GetMapping("/getList")
-    public ResponseEntity<List<RoleDTO>> getRoles(){
-        List<RoleDTO> roles = roleService.findRoles();
+    public ResponseEntity<List<RoleDTO>> getRoles() {
+        List<RoleDTO> roles = roleService.findRoles().stream()
+                .peek(role -> {
+                    if (role.getName().equals("ROLE_CUSTOMER")) {
+                        role.setName("Cliente");
+                    } else if (role.getName().equals("ROLE_DRUGSTORE")) {
+                        role.setName("Botica");
+                    }
+                })
+                .collect(Collectors.toList());
+
         return new ResponseEntity<>(roles, HttpStatus.OK);
     }
+
     @GetMapping("/searchById/{id}")
     public ResponseEntity<Optional<Role>> findById(
             @PathVariable("id") UUID id
