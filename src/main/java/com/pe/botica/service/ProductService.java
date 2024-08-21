@@ -23,7 +23,7 @@ public class ProductService {
     public Optional<Product> findById(UUID id ) { return productRepository.findById(id);}
     public Product save( Product product ){ return productRepository.save(product); }
     public void deleteById( UUID id ){ productRepository.deleteById(id);}
-    public List<OptionDTO> findAllProductOptions(){ return productRepository.getAllProductOptions();}
+    public List<OptionDTO> findAllProductOptions( UUID drugstoreId ){ return productRepository.getAllProductOptions(drugstoreId);}
     public List<MyProductsViewDTO> findAllMyProducts(UUID drugstoreId){ return productRepository.getAllMyProducts(drugstoreId);}
 
 }

@@ -56,13 +56,19 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
     public List<MyProductsViewDTO> getAllMyProducts(@Param("drugstoreId") UUID drugstoreId);
 
     @Query(value = """
-        SELECT new com.pe.botica.dto.OptionDTO(
-         p.id,
-         p.name
-        )
-        FROM Product p
-        """)
-    public List<OptionDTO> getAllProductOptions();
+    SELECT new com.pe.botica.dto.OptionDTO(
+        p.id,
+        p.name
+    )
+    FROM Product p
+    WHERE p.id NOT IN (
+        SELECT dp.product.id
+        FROM DrugstoreProduct dp
+        WHERE dp.user.id = :drugstoreId
+    )
+    """)
+    public List<OptionDTO> getAllProductOptions(@Param("drugstoreId") UUID drugstoreId);
+
     @Query(value = """
         SELECT new com.pe.botica.dto.ProductDetailDTO(
          p.name,

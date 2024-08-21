@@ -46,9 +46,9 @@ public class ServiceController {
         List<MyServicesViewDTO> services = serviceService.findAllMyServices(drugstoreId);
         return new ResponseEntity<>(services, HttpStatus.OK);
     }
-    @GetMapping("/all/options")
-    public ResponseEntity<List<OptionDTO>> getAllProductsOptions(){
-        List<OptionDTO> services = serviceService.findAllServiceOptions();
+    @GetMapping("/all/options/{drugstoreId}")
+    public ResponseEntity<List<OptionDTO>> getAllProductsOptions(@PathVariable("drugstoreId") UUID drugstoreId){
+        List<OptionDTO> services = serviceService.findAllServiceOptions(drugstoreId);
         return new ResponseEntity<>(services, HttpStatus.OK);
     }
     @PostMapping("/register")

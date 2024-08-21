@@ -25,7 +25,6 @@ public class Service {
     private String imageUrl;
     @ManyToOne
     @JoinColumn(name = "category_id")
-    @JsonBackReference
     private Category category;
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL)
     @JsonManagedReference

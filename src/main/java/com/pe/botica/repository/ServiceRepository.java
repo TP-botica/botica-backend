@@ -40,9 +40,14 @@ public interface ServiceRepository extends JpaRepository<Service, UUID> {
              s.id,
              s.name
             ) from Service s
-            """
+        WHERE s.id NOT IN (
+        SELECT ds.service.id
+        FROM DrugstoreService ds
+        WHERE ds.user.id = :drugstoreId
     )
-    List<OptionDTO> getAllServiceOptions();
+    """
+    )
+    List<OptionDTO> getAllServiceOptions(@Param("drugstoreId") UUID drugstoreId);
     @Query(value = """
      SELECT new com.pe.botica.dto.MyServicesViewDTO(
      s.id,

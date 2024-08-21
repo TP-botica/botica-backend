@@ -33,9 +33,11 @@ public class ProductController {
         List<ProductServiceViewDTO> products = productService.findAllByCategory(categoryId);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
-    @GetMapping("/all/options")
-    public ResponseEntity<List<OptionDTO>> getAllProductsOptions(){
-        List<OptionDTO> products = productService.findAllProductOptions();
+    @GetMapping("/all/options/{drugstoreId}")
+    public ResponseEntity<List<OptionDTO>> getAllProductsOptions(
+            @PathVariable("drugstoreId") UUID drugstoreId
+    ){
+        List<OptionDTO> products = productService.findAllProductOptions(drugstoreId);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
     @GetMapping("/allMyProducts/{drugstoreId}")

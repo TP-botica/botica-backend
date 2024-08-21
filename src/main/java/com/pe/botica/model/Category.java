@@ -1,5 +1,6 @@
 package com.pe.botica.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -19,9 +20,9 @@ public class Category {
     @Column(name = "type", length = 1)
     private String type;
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonIgnore
     private List<Product> products;
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonIgnore
     private List<Service> services;
 }

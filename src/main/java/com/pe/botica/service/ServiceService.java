@@ -22,8 +22,8 @@ public class ServiceService {
     public ServiceDetailDTO getDetailsById(UUID serviceId ) { return serviceRepository.getServiceDetailsById(serviceId);}
     public com.pe.botica.model.Service save( com.pe.botica.model.Service service ){ return serviceRepository.save(service); }
     public void deleteById( UUID id ){ serviceRepository.deleteById(id);}
-    public List<OptionDTO> findAllServiceOptions() {
-        return serviceRepository.getAllServiceOptions();
+    public List<OptionDTO> findAllServiceOptions(UUID drugstoreId) {
+        return serviceRepository.getAllServiceOptions(drugstoreId);
     }
     public List<MyServicesViewDTO> findAllMyServices(UUID drugstoreId) {
         return serviceRepository.getAllMyServices(drugstoreId);
