@@ -78,6 +78,17 @@ public class UserController {
         }
         return new ResponseEntity<>("Passwords are different", HttpStatus.BAD_REQUEST);
     }
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<UserDataDTO> editProfile(
+            @PathVariable("id") UUID id,
+            @RequestBody UserDataDTO user
+    ){
+        User userUpdate = userService.findById(id).orElseThrow(()->new RuntimeException("user not found with id: " + id));
+        userUpdate.setName(user.getName());
+        userUpdate.setEmail(user.getEmail());
+        userService.save(userUpdate);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
     @PostMapping("/auth")
     public ResponseEntity<AuthenticationResponseDTO> authUser(@RequestBody UserLoginDTO userLoginDTO){
         AuthenticationResponseDTO response = authService.login(userLoginDTO);
