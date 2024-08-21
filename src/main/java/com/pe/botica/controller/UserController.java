@@ -85,7 +85,6 @@ public class UserController {
     ){
         User userUpdate = userService.findById(id).orElseThrow(()->new RuntimeException("user not found with id: " + id));
         userUpdate.setName(user.getName());
-        userUpdate.setEmail(user.getEmail());
         userService.save(userUpdate);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
