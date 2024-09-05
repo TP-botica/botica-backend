@@ -2,8 +2,10 @@ package com.pe.botica.controller;
 
 import com.pe.botica.dto.PurchaseRegisterDTO;
 import com.pe.botica.dto.PurchaseViewDTO;
+import com.pe.botica.model.DrugstoreProduct;
 import com.pe.botica.model.Purchase;
 import com.pe.botica.model.PurchaseDetail;
+import com.pe.botica.model.compoundId.DrugstoreProductId;
 import com.pe.botica.model.security.User;
 import com.pe.botica.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,8 @@ public class PurchaseController {
     private ProductService productService;
     @Autowired
     private ServiceService serviceService;
+    @Autowired
+    private DrugstoreProductService drugstoreProductService;
 
     @GetMapping("/all")
     public ResponseEntity<List<Purchase>> getAllPurchases(){
@@ -90,7 +94,21 @@ public class PurchaseController {
 
                 if (hasProduct) {
                     productService.findById(purchaseDetailDTO.getProductId())
-                            .ifPresentOrElse(purchaseDetail::setProduct, () -> {
+                            .ifPresentOrElse(product -> {
+                                DrugstoreProductId id = new DrugstoreProductId(product.getId(), drugstore.get().getId());
+                                DrugstoreProduct drugstoreProduct = drugstoreProductService.findById(id)
+                                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Drugstore product not found"));;
+                                int newStock = drugstoreProduct.getStock() - purchaseDetailDTO.getQuantity();
+
+                                if (newStock < 0) {
+                                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insufficient stock");
+                                }
+
+                                drugstoreProduct.setStock(newStock);
+                                drugstoreProductService.save(drugstoreProduct);
+
+                                purchaseDetail.setProduct(product);
+                            }, () -> {
                                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product not found");
                             });
                 } else if (hasService) {
