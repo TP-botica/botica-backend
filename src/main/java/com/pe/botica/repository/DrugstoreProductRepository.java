@@ -22,7 +22,7 @@ public interface DrugstoreProductRepository extends JpaRepository<DrugstoreProdu
         dp.user.longitude
     )
     FROM DrugstoreProduct dp
-    WHERE dp.product.id = :productId
+    WHERE dp.product.id = :productId AND dp.stock > 0
     """)
     public List<DrugstoreLocationsDTO> getLocationsByProduct(UUID productId);
     @Query(value = """

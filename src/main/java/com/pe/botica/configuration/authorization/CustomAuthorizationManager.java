@@ -6,7 +6,6 @@ import com.pe.botica.model.security.User;
 import com.pe.botica.repository.OperationRepository;
 import com.pe.botica.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,7 +16,6 @@ import org.springframework.security.web.access.intercept.RequestAuthorizationCon
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.regex.Matcher;
@@ -51,6 +49,16 @@ public class CustomAuthorizationManager implements AuthorizationManager<RequestA
         if(!(authentication instanceof UsernamePasswordAuthenticationToken)){
             throw new AuthenticationCredentialsNotFoundException("User not logged in");
         }
+
+
+        if (url.matches("/drugstoreService/deleteById/[0-9a-fA-F\\-]+/[0-9a-fA-F\\-]+") && httpMethod.equals("DELETE")) {
+            return true;
+        }
+
+        if (url.matches("/drugstoreService/edit/[0-9a-fA-F\\-]+/[0-9a-fA-F\\-]+") && httpMethod.equals("PUT")) {
+            return true;
+        }
+
 
         List<Operation> operations = obtainOperations(authentication);
 
